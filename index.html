@@ -952,6 +952,49 @@
                 width: 90%;
             }
         }
+
+        /* === SYNC BUTTONS STYLE === */
+        .sync-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .sync-btn {
+            background: var(--silver-lake);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .sync-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .sync-btn.export {
+            background: #28a745;
+        }
+
+        .sync-btn.import {
+            background: var(--burgundy);
+        }
+
+        .sync-btn.cloud-save {
+            background: #17a2b8;
+        }
+
+        .sync-btn.cloud-load {
+            background: #6f42c1;
+        }
     </style>
 </head>
 <body>
@@ -980,6 +1023,17 @@
                 </h2>
                 <p>Semangat menjalani hari ini!</p>
                 <div class="current-date" id="current-date"></div>
+                
+                <!-- Sync Buttons -->
+                <div class="sync-buttons">
+                    <button class="sync-btn export" onclick="exportData()">💾 Export Data</button>
+                    <label class="sync-btn import">
+                        📤 Import Data
+                        <input type="file" accept=".json" onchange="importData(event)" style="display: none;">
+                    </label>
+                    <button class="sync-btn cloud-save" onclick="saveToCloud()">☁️ Save to Cloud</button>
+                    <button class="sync-btn cloud-load" onclick="loadFromCloud()">📥 Load from Cloud</button>
+                </div>
             </div>
             
             <div class="stats-grid">
@@ -1026,121 +1080,8 @@
         <div id="kuliah" class="tab-content">
             <div class="courses-section">
                 <h2>🎓 Mata Kuliah</h2>
-                <div class="courses-grid">
-                    <!-- Pemrograman Web -->
-                    <div class="course-card">
-                        <div class="course-header">
-                            <div class="course-info">
-                                <div class="course-name">Pemrograman Web</div>
-                                <div class="course-details">
-                                    <span class="course-detail">Senin</span>
-                                    <span class="course-detail">Lab. Komputer A</span>
-                                </div>
-                            </div>
-                            <div class="course-sks">3 SKS</div>
-                        </div>
-                        <div class="course-content">
-                            <div class="schedule-info">
-                                <div class="schedule-time">🕐 08:00 - 10:00</div>
-                                <div class="schedule-room">📍 Lab. Komputer A</div>
-                            </div>
-                            <a href="#" class="modul-link" target="_blank">
-                                📖 Buka Modul
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Basis Data -->
-                    <div class="course-card">
-                        <div class="course-header">
-                            <div class="course-info">
-                                <div class="course-name">Basis Data</div>
-                                <div class="course-details">
-                                    <span class="course-detail">Senin</span>
-                                    <span class="course-detail">Ruang 301</span>
-                                </div>
-                            </div>
-                            <div class="course-sks">3 SKS</div>
-                        </div>
-                        <div class="course-content">
-                            <div class="schedule-info">
-                                <div class="schedule-time">🕐 13:00 - 15:00</div>
-                                <div class="schedule-room">📍 Ruang 301</div>
-                            </div>
-                            <a href="#" class="modul-link" target="_blank">
-                                📖 Buka Modul
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Matematika Diskrit -->
-                    <div class="course-card">
-                        <div class="course-header">
-                            <div class="course-info">
-                                <div class="course-name">Matematika Diskrit</div>
-                                <div class="course-details">
-                                    <span class="course-detail">Selasa</span>
-                                    <span class="course-detail">Ruang 201</span>
-                                </div>
-                            </div>
-                            <div class="course-sks">3 SKS</div>
-                        </div>
-                        <div class="course-content">
-                            <div class="schedule-info">
-                                <div class="schedule-time">🕐 09:00 - 11:00</div>
-                                <div class="schedule-room">📍 Ruang 201</div>
-                            </div>
-                            <a href="#" class="modul-link" target="_blank">
-                                📖 Buka Modul
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Struktur Data -->
-                    <div class="course-card">
-                        <div class="course-header">
-                            <div class="course-info">
-                                <div class="course-name">Struktur Data</div>
-                                <div class="course-details">
-                                    <span class="course-detail">Rabu</span>
-                                    <span class="course-detail">Lab. Komputer B</span>
-                                </div>
-                            </div>
-                            <div class="course-sks">3 SKS</div>
-                        </div>
-                        <div class="course-content">
-                            <div class="schedule-info">
-                                <div class="schedule-time">🕐 10:00 - 12:00</div>
-                                <div class="schedule-room">📍 Lab. Komputer B</div>
-                            </div>
-                            <a href="#" class="modul-link" target="_blank">
-                                📖 Buka Modul
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Jaringan Komputer -->
-                    <div class="course-card">
-                        <div class="course-header">
-                            <div class="course-info">
-                                <div class="course-name">Jaringan Komputer</div>
-                                <div class="course-details">
-                                    <span class="course-detail">Rabu</span>
-                                    <span class="course-detail">Ruang 402</span>
-                                </div>
-                            </div>
-                            <div class="course-sks">3 SKS</div>
-                        </div>
-                        <div class="course-content">
-                            <div class="schedule-info">
-                                <div class="schedule-time">🕐 14:00 - 16:00</div>
-                                <div class="schedule-room">📍 Ruang 402</div>
-                            </div>
-                            <a href="#" class="modul-link" target="_blank">
-                                📖 Buka Modul
-                            </a>
-                        </div>
-                    </div>
+                <div class="courses-grid" id="courses-container">
+                    <!-- Mata kuliah akan di-generate oleh JavaScript -->
                 </div>
             </div>
         </div>
@@ -1344,6 +1285,66 @@
             events: []
         };
 
+        // === MATA KULIAH DATA ===
+        const myCourses = [
+            {
+                name: "Analisis",
+                days: ["Senin", "Rabu"],
+                time: "07.00 - 08.40",
+                room: "F102",
+                sks: "4 SKS",
+                modul: "https://docs.google.com/file/d/0B_jV8ojQ-nf-VlAzeW1qWUp0aU0/view?resourcekey=0-foJnXMoJtPAn81Yup9azxQ"
+            },
+            {
+                name: "Aljabar 1",
+                days: ["Senin", "Rabu"],
+                time: "09.00 - 10.40",
+                room: "T101A",
+                sks: "3 SKS",
+                modul: "https://www.its.ac.id/matematika/aljabar-suatu-pondasi-matematika/"
+            },
+            {
+                name: "Riset Operasi 1",
+                days: ["Selasa", "Kamis"],
+                time: "09.00 - 10.40",
+                room: "F111",
+                sks: "4 SKS",
+                modul: "https://sitisabrinasalqaura.blog.uma.ac.id/wp-content/uploads/sites/621/2020/01/epdf.pub_operations-research-an-introduction.pdf"
+            },
+            {
+                name: "Persamaan Diferensial Biasa",
+                days: ["Selasa", "Kamis"],
+                time: "11.00 - 12.40",
+                room: "F102",
+                sks: "3 SKS",
+                modul: "https://itsacid-my.sharepoint.com/:b:/g/personal/nora_its_ac_id/EX5gtUQlNyBAry_xW_RmWEIBSgZZdFc_0iLc-cp0A9NDTg?e=lx82NO"
+            },
+            {
+                name: "Kalkulus Peubah Banyak",
+                days: ["Rabu", "Jumat"],
+                time: "Rabu: 15.30-17.10<br>Jumat: 13.30-15.20",
+                room: "F111",
+                sks: "3 SKS",
+                modul: "https://www.scribd.com/document/824667065/KALKULUS-PEUBAH-BANYAK-24agst2020"
+            },
+            {
+                name: "Metode Numerik",
+                days: ["Selasa", "Jumat"],
+                time: "Selasa: 15.30-17.10<br>Jumat: 07.00-08.50",
+                room: "T101A",
+                sks: "3 SKS",
+                modul: "https://www.its.ac.id/matematika/wp-content/uploads/sites/42/2024/08/Buku-Metode-Numerik-2022-Chairul-Imron.pdf"
+            },
+            {
+                name: "Karir Matematika",
+                days: ["Jumat"],
+                time: "15.30 - 17.10",
+                room: "-",
+                sks: "2 SKS",
+                modul: "#"
+            }
+        ];
+
         // === INITIALIZATION ===
         document.addEventListener('DOMContentLoaded', function() {
             loadData();
@@ -1353,6 +1354,7 @@
             updateCurrentDate();
             updateTransactionsTable();
             updateEventsTable();
+            updateCoursesDisplay();
         });
 
         // === DATA MANAGEMENT ===
@@ -1432,6 +1434,41 @@
             };
             document.getElementById('current-date').textContent = 
                 now.toLocaleDateString('id-ID', options);
+        }
+
+        // === COURSES DISPLAY ===
+        function updateCoursesDisplay() {
+            const container = document.getElementById('courses-container');
+            container.innerHTML = '';
+
+            myCourses.forEach(course => {
+                const courseCard = document.createElement('div');
+                courseCard.className = 'course-card';
+                
+                courseCard.innerHTML = `
+                    <div class="course-header">
+                        <div class="course-info">
+                            <div class="course-name">${course.name}</div>
+                            <div class="course-details">
+                                <span class="course-detail">${course.days.join(', ')}</span>
+                                <span class="course-detail">${course.room}</span>
+                            </div>
+                        </div>
+                        <div class="course-sks">${course.sks}</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="schedule-info">
+                            <div class="schedule-time">🕐 ${course.time}</div>
+                            <div class="schedule-room">📍 ${course.room}</div>
+                        </div>
+                        <a href="${course.modul}" class="modul-link" target="_blank">
+                            📖 Buka Modul
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(courseCard);
+            });
         }
 
         // === TASKS MANAGEMENT ===
@@ -1746,6 +1783,77 @@
             }
         }
 
+        // === SYNC FUNCTIONS ===
+        function exportData() {
+            const dataStr = JSON.stringify(studentData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `campus-data-${new Date().getTime()}.json`;
+            a.click();
+            alert('Data berhasil diexport! Simpan file ini untuk backup.');
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    studentData = importedData;
+                    saveData();
+                    updateAllDisplays();
+                    alert('Data berhasil diimport!');
+                } catch (error) {
+                    alert('Error importing data: File tidak valid');
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // Simple cloud sync using localStorage (bisa diganti dengan backend nanti)
+        function saveToCloud() {
+            // Simpan ke localStorage dengan timestamp
+            const cloudData = {
+                data: studentData,
+                timestamp: new Date().toISOString(),
+                device: navigator.userAgent
+            };
+            localStorage.setItem('campusCloudData', JSON.stringify(cloudData));
+            alert('Data berhasil disimpan ke cloud!');
+        }
+
+        function loadFromCloud() {
+            const cloudData = localStorage.getItem('campusCloudData');
+            if (!cloudData) {
+                alert('Tidak ada data di cloud!');
+                return;
+            }
+
+            try {
+                const parsedData = JSON.parse(cloudData);
+                studentData = parsedData.data;
+                saveData();
+                updateAllDisplays();
+                alert('Data berhasil di-load dari cloud!');
+            } catch (error) {
+                alert('Error loading data dari cloud');
+            }
+        }
+
+        function updateAllDisplays() {
+            updateDashboard();
+            updateTasksTable();
+            updateFinanceSummary();
+            updateTransactionsTable();
+            updateEventsTable();
+        }
+
         // === HELPER FUNCTIONS ===
         function calculateDaysLeft(dateString) {
             const today = new Date();
@@ -1805,26 +1913,18 @@
                 studentData.tasks = [
                     {
                         id: 1,
-                        matkul: "Pemrograman Web",
-                        deskripsi: "Buat website portfolio menggunakan HTML, CSS, JavaScript",
+                        matkul: "Analisis",
+                        deskripsi: "Kerjakan soal latihan bab 1 dan 2",
                         deadline: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
                         priority: "high",
                         completed: false
                     },
                     {
                         id: 2,
-                        matkul: "Basis Data",
-                        deskripsi: "Desain database untuk sistem perpustakaan",
+                        matkul: "Aljabar 1",
+                        deskripsi: "Buat rangkuman materi grup dan ring",
                         deadline: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
                         priority: "medium",
-                        completed: false
-                    },
-                    {
-                        id: 3,
-                        matkul: "Matematika Diskrit",
-                        deskripsi: "Kerjakan soal latihan bab 5 dan 6",
-                        deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                        priority: "low",
                         completed: false
                     }
                 ];
@@ -1847,14 +1947,6 @@
                         amount: 25000,
                         method: "gopay",
                         date: new Date().toISOString().split('T')[0]
-                    },
-                    {
-                        id: 3,
-                        type: "expense",
-                        description: "Buku referensi kuliah",
-                        amount: 120000,
-                        method: "tunai",
-                        date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
                     }
                 ];
             }
@@ -1863,27 +1955,11 @@
                 studentData.events = [
                     {
                         id: 1,
-                        name: "Tech Conference 2023",
-                        description: "Konferensi teknologi terbesar tahun ini dengan pembicara dari perusahaan ternama",
+                        name: "Seminar Matematika",
+                        description: "Seminar tentang aplikasi matematika dalam industri",
                         date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                        location: "Auditorium Kampus",
+                        location: "Auditorium Matematika",
                         type: "academic"
-                    },
-                    {
-                        id: 2,
-                        name: "Charity Run",
-                        description: "Lari amal untuk mengumpulkan dana bagi anak-anak kurang mampu",
-                        date: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                        location: "Lapangan Kampus",
-                        type: "social"
-                    },
-                    {
-                        id: 3,
-                        name: "Natal Bersama",
-                        description: "Perayaan natal bersama komunitas kampus dengan berbagai kegiatan seru",
-                        date: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-                        location: "Aula Student Center",
-                        type: "cultural"
                     }
                 ];
             }
@@ -1894,73 +1970,6 @@
             updateTransactionsTable();
             updateEventsTable();
         }
-
-        // === MANUAL SYNC ===
-function exportData() {
-    const dataStr = JSON.stringify(studentData, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `campus-data-${new Date().getTime()}.json`;
-    a.click();
-}
-
-function importData(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        try {
-            const importedData = JSON.parse(e.target.result);
-            studentData = importedData;
-            saveData();
-            updateAllDisplays();
-            alert('Data berhasil diimport!');
-        } catch (error) {
-            alert('Error importing data: ' + error.message);
-        }
-    };
-    
-    reader.readAsText(file);
-}
-
-// Tambah tombol sync di Dashboard
-function addSyncButtons() {
-    const welcomeSection = document.querySelector('.welcome-section');
-    
-    const syncDiv = document.createElement('div');
-    syncDiv.style.marginTop = '15px';
-    syncDiv.innerHTML = `
-        <button onclick="exportData()" style="background: var(--silver-lake); color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
-            💾 Export Data
-        </button>
-        <label style="background: var(--burgundy); color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
-            📤 Import Data
-            <input type="file" accept=".json" onchange="importData(event)" style="display: none;">
-        </label>
-        <button onclick="saveToCloud()" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
-            ☁️ Save to Cloud
-        </button>
-        <button onclick="loadFromCloud()" style="background: #17a2b8; color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
-            📥 Load from Cloud
-        </button>
-    `;
-    
-    welcomeSection.appendChild(syncDiv);
-}
-
-// Panggil di initialization
-document.addEventListener('DOMContentLoaded', function() {
-    loadData();
-    updateDashboard();
-    updateTasksTable();
-    updateFinanceSummary();
-    updateCurrentDate();
-    updateTransactionsTable();
-    updateEventsTable();
-    addSyncButtons(); // ← TAMBAH INI
-});
     </script>
 </body>
 </html>
