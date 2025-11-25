@@ -1894,6 +1894,73 @@
             updateTransactionsTable();
             updateEventsTable();
         }
+
+        // === MANUAL SYNC ===
+function exportData() {
+    const dataStr = JSON.stringify(studentData, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `campus-data-${new Date().getTime()}.json`;
+    a.click();
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        try {
+            const importedData = JSON.parse(e.target.result);
+            studentData = importedData;
+            saveData();
+            updateAllDisplays();
+            alert('Data berhasil diimport!');
+        } catch (error) {
+            alert('Error importing data: ' + error.message);
+        }
+    };
+    
+    reader.readAsText(file);
+}
+
+// Tambah tombol sync di Dashboard
+function addSyncButtons() {
+    const welcomeSection = document.querySelector('.welcome-section');
+    
+    const syncDiv = document.createElement('div');
+    syncDiv.style.marginTop = '15px';
+    syncDiv.innerHTML = `
+        <button onclick="exportData()" style="background: var(--silver-lake); color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
+            💾 Export Data
+        </button>
+        <label style="background: var(--burgundy); color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
+            📤 Import Data
+            <input type="file" accept=".json" onchange="importData(event)" style="display: none;">
+        </label>
+        <button onclick="saveToCloud()" style="background: #28a745; color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
+            ☁️ Save to Cloud
+        </button>
+        <button onclick="loadFromCloud()" style="background: #17a2b8; color: white; border: none; padding: 8px 12px; border-radius: 6px; margin: 5px; cursor: pointer;">
+            📥 Load from Cloud
+        </button>
+    `;
+    
+    welcomeSection.appendChild(syncDiv);
+}
+
+// Panggil di initialization
+document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+    updateDashboard();
+    updateTasksTable();
+    updateFinanceSummary();
+    updateCurrentDate();
+    updateTransactionsTable();
+    updateEventsTable();
+    addSyncButtons(); // ← TAMBAH INI
+});
     </script>
 </body>
 </html>
